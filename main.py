@@ -18,6 +18,6 @@ d = pri_key.d
 e = pub_key.e
 n = pub_key.n
 string_enc = rsa_enc(string,pub_key)
-string_enc , tag = aes_enc(string_enc,n)
+string_enc , tag = aes_enc(string_enc,n)2
 print("暗号化文" + string_enc)
 print("TAG" + tag)
