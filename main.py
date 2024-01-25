@@ -9,8 +9,9 @@ def rsa_dec(x,y):
 def aes_enc(x,y):
     cipher = AES.new(y, AES.MODE_EAX)
     z, tag = cipher.encrypt_and_digest(x)
-    return z,tag,cipher
-def aes_dec(x,y,z,e):
+    return z,tag
+def aes_dec(x,y,z):
+    e = AES.new(y, AES.MODE_EAX)
     cipher_enc = AES.new(y, AES.MODE_EAX,e.nonce)
     try:
         # 復号化
@@ -31,11 +32,11 @@ while(True):
         n = pub_key.n
         n_bytes = n.to_bytes(16, "big")
         string_enc = rsa_enc(string,pub_key)
-        string_enc , tag, cih = aes_enc(string_enc,n_bytes)
+        string_enc , tag= aes_enc(string_enc,n_bytes)
         print(string_enc)
         print(pri_key)
         print(tag)
-        string_dec = aes_dec(string_enc,n_bytes,tag,cih)
+        string_dec = aes_dec(string_enc,n_bytes,tag)
         print(string_dec)
         string_dec = rsa_dec(string_dec,pri_key)
         print(string_dec)
