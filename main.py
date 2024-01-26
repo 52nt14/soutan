@@ -38,7 +38,6 @@ while(True):
                 private_str = pri_key.save_pkcs1('PEM')
                 f.write(private_str)
             with open(file_path+".tag", "wb+") as f:
-                print(tag)
                 f.write(tag)
             with open(file_path+".cih", "wb+") as f:
                 f.write(cih)
